@@ -37,6 +37,23 @@ sigue funcionando con las que sí tengas activas.
   `frontend/src/i18n/translations.js` y en `backend/app/core/i18n.py`,
   y súmalo a `LANGUAGES` en el frontend.
 
+## Solución de problemas
+
+Si al ejecutar `npm run build` o `npm run dev` ves un error como
+`Cannot find native binding` o `Cannot find module '@rolldown/binding-...'`,
+es un bug conocido de npm con dependencias opcionales de binarios nativos
+(https://github.com/npm/cli/issues/4828). Solución:
+
+```bash
+cd frontend
+rm -rf node_modules package-lock.json     # En Windows: rmdir /s /q node_modules & del package-lock.json
+npm install
+```
+
+El `package.json` de este proyecto ya usa Vite 6 (estable, sin binarios
+nativos problemáticos) en vez de la versión experimental de Vite 8, así
+que un `npm install` limpio debería resolverlo directamente.
+
 ## Requisitos previos
 
 - Python 3.10+
